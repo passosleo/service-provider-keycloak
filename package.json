@@ -1,0 +1,39 @@
+{
+  "name": "service-provider-keycloak",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "start": "node ./dist/main.js",
+    "build": "tsup src --out-dir dist",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "ts:check": "npx tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "Leonardo Passos",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cookie": "^11.0.1",
+    "@fastify/multipart": "^8.3.0",
+    "@fastify/static": "^8.0.3",
+    "@fastify/swagger": "^8.15.0",
+    "@fastify/swagger-ui": "^4.1.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.4.1",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-unused-imports": "^4.1.3",
+    "prettier": "^3.3.3",
+    "tsup": "^8.2.4",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
+  }
+}
