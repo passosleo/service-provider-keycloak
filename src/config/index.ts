@@ -13,7 +13,7 @@ export const config = {
   app: {
     environment: process.env.NODE_ENV || 'development',
     port: Number(process.env.PORT) || 4000,
-    sessionCookie: 'session',
+    sessionCookieName: 'accessToken',
   },
   keycloak: {
     baseUrl: requiredEnv(process.env.KEYCLOAK_BASE_URL),
