@@ -12,11 +12,11 @@ type KeycloakOAuth2ClientConfig = {
 export class KeycloakOAuth2Client implements OAuth2Client {
   private config: KeycloakOAuth2ClientConfig;
 
-  constructor(config: KeycloakOAuth2ClientConfig) {
+  public constructor(config: KeycloakOAuth2ClientConfig) {
     this.config = config;
   }
 
-  getAuthenticatorUrl(): string {
+  public getAuthenticatorUrl(): string {
     const authUrl = `${this.config.baseUrl}/realms/${this.config.realm}/protocol/openid-connect/auth`;
     const params = new URLSearchParams({
       client_id: this.config.clientId,

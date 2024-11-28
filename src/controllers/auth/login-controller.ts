@@ -1,16 +1,14 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { KeycloakOAuth2Client } from '../../clients/keycloak-oauth2-client';
+import { config } from '../../config';
 import { OAuth2Client } from '../../clients/oauth2-client';
 
 export class LoginController {
-  private oAuth2Client: OAuth2Client;
+  public static async handle(req: FastifyRequest, res: FastifyReply) {
+    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(config.keycloak);
 
-  public constructor(oAuth2Client: OAuth2Client) {
-    this.oAuth2Client = oAuth2Client;
-  }
-
-  public async handle(req: FastifyRequest, res: FastifyReply) {
     try {
-      res.redirect(this.oAuth2Client.getAuthenticatorUrl());
+      res.redirect(oAuth2Client.getAuthenticatorUrl());
     } catch (err) {
       console.error(err);
       res.status(500).send({

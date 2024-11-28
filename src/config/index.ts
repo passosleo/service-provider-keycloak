@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 function requiredEnv(key?: string) {
   if (!key) {
     throw new Error('Environment variable key not provided.');
@@ -16,10 +18,10 @@ export const config = {
     sessionCookieName: 'accessToken',
   },
   keycloak: {
-    baseUrl: requiredEnv(process.env.KEYCLOAK_BASE_URL),
-    realm: requiredEnv(process.env.KEYCLOAK_REALM),
-    clientId: requiredEnv(process.env.KEYCLOAK_CLIENT_ID),
-    clientSecret: requiredEnv(process.env.KEYCLOAK_CLIENT_SECRET),
-    redirectUri: requiredEnv(process.env.KEYCLOAK_REDIRECT_URI),
+    baseUrl: requiredEnv('KEYCLOAK_BASE_URL'),
+    realm: requiredEnv('KEYCLOAK_REALM'),
+    clientId: requiredEnv('KEYCLOAK_CLIENT_ID'),
+    clientSecret: requiredEnv('KEYCLOAK_CLIENT_SECRET'),
+    redirectUri: requiredEnv('KEYCLOAK_REDIRECT_URI'),
   },
 };

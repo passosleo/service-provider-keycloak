@@ -1,14 +1,12 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { KeycloakOAuth2Client } from '../../clients/keycloak-oauth2-client';
+import { config } from '../../config';
 import { OAuth2Client } from '../../clients/oauth2-client';
 
 export class GetUserInfoController {
-  private oAuth2Client: OAuth2Client;
+  public static async handle(req: FastifyRequest, res: FastifyReply) {
+    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(config.keycloak);
 
-  public constructor(oAuth2Client: OAuth2Client) {
-    this.oAuth2Client = oAuth2Client;
-  }
-
-  public async handle(req: FastifyRequest, res: FastifyReply) {
     try {
       const accessToken = req.cookies.accessToken;
 
@@ -17,7 +15,7 @@ export class GetUserInfoController {
         return;
       }
 
-      const userInfo = await this.oAuth2Client.getUserInfo(accessToken);
+      const userInfo = await oAuth2Client.getUserInfo(accessToken);
 
       res.type('text/html').send(`
       <h1>Informações do Usuário</h1>

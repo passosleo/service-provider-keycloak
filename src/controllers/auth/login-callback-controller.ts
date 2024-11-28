@@ -1,15 +1,12 @@
+import { KeycloakOAuth2Client } from '../../clients/keycloak-oauth2-client';
+import { OAuth2Client } from '../../clients/oauth2-client';
 import { config } from '../../config';
-import { OAuth2Client } from './../../clients/oauth2-client';
 import { FastifyReply, FastifyRequest } from 'fastify';
 
 export class LoginCallbackController {
-  private oAuth2Client: OAuth2Client;
+  public static async handle(req: FastifyRequest<{ Querystring: { code: string } }>, res: FastifyReply) {
+    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(config.keycloak);
 
-  public constructor(oAuth2Client: OAuth2Client) {
-    this.oAuth2Client = oAuth2Client;
-  }
-
-  public async handle(req: FastifyRequest<{ Querystring: { code: string } }>, res: FastifyReply) {
     try {
       const code = req.query.code;
 
@@ -21,7 +18,7 @@ export class LoginCallbackController {
         return;
       }
 
-      const accessToken = await this.oAuth2Client.getAccessToken(code);
+      const accessToken = await oAuth2Client.getAccessToken(code);
 
       res
         .setCookie(config.app.sessionCookieName, accessToken, {
