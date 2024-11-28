@@ -5,10 +5,14 @@ import { OAuth2Client } from '../../clients/oauth2-client';
 
 export class LogoutController {
   public static async handle(req: FastifyRequest, res: FastifyReply) {
-    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(config.keycloak);
+    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(
+      config.keycloak,
+    );
 
     try {
-      res.clearCookie(config.app.sessionCookieName).redirect(oAuth2Client.getLogoutUrl('http://localhost:4000/'));
+      res
+        .clearCookie(config.app.sessionCookieName)
+        .redirect(oAuth2Client.getLogoutUrl(config.app.baseUrl));
     } catch (err) {
       console.error(err);
       res.status(500).send({

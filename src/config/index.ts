@@ -14,7 +14,14 @@ function requiredEnv(key?: string) {
 export const config = {
   app: {
     environment: process.env.NODE_ENV || 'development',
+    host: requiredEnv('APP_HOST'),
     port: Number(process.env.PORT) || 4000,
+    get baseUrl() {
+      if (this.environment === 'development') {
+        return `${this.host}:${this.port}`;
+      }
+      return this.host;
+    },
     sessionCookieName: 'accessToken',
   },
   keycloak: {

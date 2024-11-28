@@ -16,7 +16,7 @@ export class KeycloakOAuth2Client implements OAuth2Client {
     this.config = config;
   }
 
-  public getAuthenticatorUrl(): string {
+  public getAuthenticatorUrl() {
     const authUrl = `${this.config.baseUrl}/realms/${this.config.realm}/protocol/openid-connect/auth`;
     const params = new URLSearchParams({
       client_id: this.config.clientId,
@@ -27,7 +27,7 @@ export class KeycloakOAuth2Client implements OAuth2Client {
     return `${authUrl}?${params.toString()}`;
   }
 
-  getLogoutUrl(redirectUri: string): string {
+  getLogoutUrl(redirectUri: string) {
     return `${this.config.baseUrl}/realms/${this.config.realm}/protocol/openid-connect/logout?redirect_uri=${redirectUri}`;
   }
 

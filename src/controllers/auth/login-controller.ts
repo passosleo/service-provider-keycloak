@@ -5,7 +5,9 @@ import { OAuth2Client } from '../../clients/oauth2-client';
 
 export class LoginController {
   public static async handle(req: FastifyRequest, res: FastifyReply) {
-    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(config.keycloak);
+    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(
+      config.keycloak,
+    );
 
     try {
       res.redirect(oAuth2Client.getAuthenticatorUrl());

@@ -1,6 +1,5 @@
 import path from 'path';
 import Fastify from 'fastify';
-import fastifyMultipart from '@fastify/multipart';
 import fastifyCookie from '@fastify/cookie';
 import fastifyStatic from '@fastify/static';
 import { authRoutes } from './routes/auth-routes';
@@ -9,13 +8,11 @@ import { config } from './config';
 
 export function buildApp() {
   const app = Fastify();
-
-  // Setup middlewares
+  const staticFolder = path.join(__dirname, 'views');
   app.register(fastifyStatic, {
-    root: path.join(__dirname, 'public'),
+    root: staticFolder,
   });
   app.register(fastifyCookie);
-  app.register(fastifyMultipart);
 
   // Setup routes
   app.register(authRoutes);
@@ -33,5 +30,7 @@ if (require.main === module) {
       process.exit(1);
     }
     console.info(`Server listening at ${address}`);
+    console.info(`Environment: ${config.app.environment}`);
+    console.info(`Base URL: ${config.app.baseUrl}`);
   });
 }

@@ -4,8 +4,13 @@ import { config } from '../../config';
 import { FastifyReply, FastifyRequest } from 'fastify';
 
 export class LoginCallbackController {
-  public static async handle(req: FastifyRequest<{ Querystring: { code: string } }>, res: FastifyReply) {
-    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(config.keycloak);
+  public static async handle(
+    req: FastifyRequest<{ Querystring: { code: string } }>,
+    res: FastifyReply,
+  ) {
+    const oAuth2Client: OAuth2Client = new KeycloakOAuth2Client(
+      config.keycloak,
+    );
 
     try {
       const code = req.query.code;
