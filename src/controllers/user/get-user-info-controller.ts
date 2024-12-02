@@ -24,6 +24,7 @@ export class GetUserInfoController {
         renderHtml('user-info.html', {
           name: userInfo.name,
           email: userInfo.email,
+          username: userInfo.preferred_username,
         }),
       );
     } catch (err) {
