@@ -10,7 +10,7 @@ export class LoginController {
     );
 
     try {
-      res.redirect(oAuth2Client.getAuthenticatorUrl());
+      res.redirect(await oAuth2Client.getAuthenticatorUrl());
     } catch (err) {
       console.error(err);
       res.status(500).send({

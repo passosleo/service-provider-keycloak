@@ -27,6 +27,8 @@ services:
       KC_DB_URL_DATABASE: ${KC_DB_URL_DATABASE}
       KC_DB_USERNAME: ${KC_DB_USERNAME}
       KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KC_HOSTNAME: ${KC_HOSTNAME}
+      KC_HOSTNAME_STRICT: ${KC_HOSTNAME_STRICT}
     command: start-dev --spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true --import-realm
     ports:
       - 8080:8080

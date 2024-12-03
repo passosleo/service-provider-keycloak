@@ -950,20 +950,6 @@
     "xXSSProtection": "1; mode=block",
     "strictTransportSecurity": "max-age=31536000; includeSubDomains"
   },
-  "smtpServer": {
-    "replyToDisplayName": "",
-    "starttls": "true",
-    "auth": "true",
-    "envelopeFrom": "",
-    "ssl": "false",
-    "password": "**********",
-    "port": "587",
-    "host": "smtp.gmail.com",
-    "replyTo": "",
-    "from": "admin@localhost.com",
-    "fromDisplayName": "Service Provider",
-    "user": "**********"
-  },
   "eventsEnabled": false,
   "eventsListeners": ["jboss-logging"],
   "enabledEventTypes": [],
@@ -1767,5 +1753,19 @@
   },
   "clientPolicies": {
     "policies": []
+  },
+  "smtpServer": {
+    "replyToDisplayName": "",
+    "starttls": "true",
+    "auth": "true",
+    "envelopeFrom": "",
+    "ssl": "false",
+    "port": "587",
+    "host": "smtp.gmail.com",
+    "replyTo": "",
+    "from": "admin@user.com",
+    "fromDisplayName": "Service Provider",
+    "user": "**********",
+    "password": "**********"
   }
 }

@@ -12,7 +12,7 @@ export class LogoutController {
     try {
       res
         .clearCookie(config.app.sessionCookieName)
-        .redirect(oAuth2Client.getLogoutUrl(config.app.baseUrl));
+        .redirect(await oAuth2Client.getLogoutUrl(config.app.baseUrl));
     } catch (err) {
       console.error(err);
       res.status(500).send({

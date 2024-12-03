@@ -16,8 +16,10 @@ export class KeycloakOAuth2Client implements OAuth2Client {
     this.config = config;
   }
 
-  public getAuthenticatorUrl() {
-    const authUrl = `${this.config.baseUrl}/realms/${this.config.realm}/protocol/openid-connect/auth`;
+  public async getAuthenticatorUrl() {
+    const authUrl = await this.getOpenIdConfig().then(
+      (config) => config.authorization_endpoint,
+    );
     const params = new URLSearchParams({
       client_id: this.config.clientId,
       redirect_uri: this.config.redirectUri,
@@ -27,11 +29,14 @@ export class KeycloakOAuth2Client implements OAuth2Client {
     return `${authUrl}?${params.toString()}`;
   }
 
-  getLogoutUrl(redirectUri: string) {
-    return `${this.config.baseUrl}/realms/${this.config.realm}/protocol/openid-connect/logout?redirect_uri=${redirectUri}`;
+  public async getLogoutUrl(redirectUri: string) {
+    const endSessionUrl = await this.getOpenIdConfig().then(
+      (config) => config.end_session_endpoint,
+    );
+    return `${endSessionUrl}?redirect_uri=${redirectUri}`;
   }
 
-  async getAccessToken(code: string) {
+  public async getAccessToken(code: string) {
     const response = await axios.post(
       `${this.config.baseUrl}/realms/${this.config.realm}/protocol/openid-connect/token`,
       new URLSearchParams({
@@ -55,7 +60,7 @@ export class KeycloakOAuth2Client implements OAuth2Client {
     }
   }
 
-  async getUserInfo(accessToken: string) {
+  public async getUserInfo(accessToken: string) {
     const response = await axios.get(
       `${this.config.baseUrl}/realms/${this.config.realm}/protocol/openid-connect/userinfo`,
       {
@@ -70,5 +75,16 @@ export class KeycloakOAuth2Client implements OAuth2Client {
     } else {
       throw new Error('Failed to obtain user info');
     }
+  }
+
+  public async getOpenIdConfig() {
+    const response = await axios.get(
+      `${this.config.baseUrl}/realms/${this.config.realm}/.well-known/openid-configuration`,
+    );
+    return {
+      authorization_endpoint: response.data.authorization_endpoint,
+      end_session_endpoint: response.data.end_session_endpoint,
+      token_endpoint: response.data.token_endpoint,
+    };
   }
 }

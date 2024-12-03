@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/main.ts",
     "start": "node ./dist/main.js",
-    "build": "tsup src --out-dir dist",
+    "build": "tsup src",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "ts:check": "npx tsc --noEmit"
   },

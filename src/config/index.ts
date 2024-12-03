@@ -17,10 +17,7 @@ export const config = {
     host: requiredEnv('APP_HOST'),
     port: Number(process.env.PORT) || 4000,
     get baseUrl() {
-      if (this.environment === 'development') {
-        return `${this.host}:${this.port}`;
-      }
-      return this.host;
+      return `${this.host}:${this.port}`;
     },
     sessionCookieName: 'accessToken',
   },
