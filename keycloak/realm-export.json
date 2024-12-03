@@ -30,7 +30,6 @@
   "registrationAllowed": true,
   "registrationEmailAsUsername": false,
   "rememberMe": true,
-  "verifyEmail": true,
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
   "resetPasswordAllowed": true,
@@ -1754,6 +1753,7 @@
   "clientPolicies": {
     "policies": []
   },
+  "verifyEmail": true,
   "smtpServer": {
     "replyToDisplayName": "",
     "starttls": "true",
@@ -1761,7 +1761,7 @@
     "envelopeFrom": "",
     "ssl": "false",
     "port": "587",
-    "host": "smtp.gmail.com",
+    "host": "smtp.server.com",
     "replyTo": "",
     "from": "admin@user.com",
     "fromDisplayName": "Service Provider",
