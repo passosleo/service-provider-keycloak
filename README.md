@@ -27,18 +27,18 @@ Primeiro, clone o repositório para o seu ambiente local:
 git clone https://github.com/passosleo/service-provider-keycloak.git
 ```
 
-### Passo 2: Configurar o envio de e-mails no Keycloak
-
-Acesse o diretório `keycloak`:
+Em seguida, navegue até o diretório do projeto:
 
 ```bash
-cd service-provider-keycloak/keycloak
+cd service-provider-keycloak
 ```
 
-Abra o arquivo `realm-export.json` e navegue até o final do arquivo. Substitua a configuração SMTP por uma configuração válida, ou se preferir, desabilite o envio de e-mails alterando o valor da propriedade para `verifyEmail: false` conforme o exemplo abaixo:
+### Passo 2: Habilite o envio de e-mails no Keycloak
+
+Abra o arquivo `realm-export.json` localizado no diretório `keycloak`. Navegue até o final do arquivo e substitua a configuração SMTP por uma configuração válida, ou se preferir, desabilite o envio de e-mails alterando o valor da propriedade para `verifyEmail: false` conforme o exemplo abaixo:
 
 ```json
-  "verifyEmail": true, // Altere para false ou configure as propriedades abaixo
+  "verifyEmail": true, // Altere para false para desabilitar ou configure as propriedades abaixo caso possua um servidor SMTP válido
   "smtpServer": {
     "replyToDisplayName": "",
     "starttls": "true",
@@ -57,13 +57,7 @@ Abra o arquivo `realm-export.json` e navegue até o final do arquivo. Substitua 
 
 ### Passo 3: Iniciar o Projeto
 
-Retorne ao diretório raiz do projeto onde se encontra o arquivo `docker-compose.yml`:
-
-```bash
-cd ..
-```
-
-Inicie o projeto executando o comando abaixo:
+No diretório raiz do projeto onde se encontra o arquivo `docker-compose.yml`, inicie o projeto executando o comando abaixo:
 
 ```bash
 docker-compose up
